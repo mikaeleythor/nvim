@@ -3,9 +3,9 @@ require('packages')
 require('options')
 
 local configs = require'nvim-treesitter.configs'
-configs.setup { 
-  ensure_installed = { 
-    maintained = true, 
+configs.setup {
+  ensure_installed = {
+    maintained = true,
   }, 
   highlight = { 
     enable = true,
@@ -48,62 +48,37 @@ require('lualine').setup {
   extensions = {}
 }
 
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-  local opts = {}
-  if server.name == "sumneko_lua" then
-    opts = {
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = {'vim', 'use' }
-          },
-        }
-      }
-    }
-  end
-  server:setup(opts)
-end)
+require("mason").setup()
+require("mason-lspconfig").setup()
 
-local cmp = require'cmp'
-cmp.setup({
-  mapping = {
-    ['<c-g>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<c-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<c-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<c-y>'] = cmp.config.disable,
-    ['<c-e>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
-    ['<CR>'] = cmp.mapping.confirm({select = true}),
-  },
-  sources = cmp.config.sources(
-    { { name = 'nvim_lsp' }, },
-    { { name = 'buffer' }, }
-  )
-})
-
-cmp.setup.cmdline('/', {
-  sources = {
-    { name = 'buffer' }
-  }
-})
-
-cmp.setup.cmdline(':', {
-  sources = cmp.config.sources(
-    { { name = 'path' } },
-    { { name = 'cmdline' } }
-  )
-})
-
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 require('lspconfig')['jdtls'].setup {
-capabilities = capabilities
+  capabilities = capabilities
 }
 require('lspconfig')['sumneko_lua'].setup {
-capabilities = capabilities
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim', 'use' }
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 }
 require('lspconfig')['jedi_language_server'].setup {
 capabilities = capabilities
@@ -130,5 +105,61 @@ require('lspconfig')['clangd'].setup {
 capabilities = capabilities
 }
 require('lspconfig')['cssls'].setup {
-capabilities = capabilities
+	capabilities = capabilities
 }
+
+local luasnip = require'luasnip'
+local cmp = require'cmp'
+
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
+  sources = cmp.config.sources {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
+  },
+}
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources(
+    { { name = 'path' } },
+    { { name = 'cmdline' } }
+  )
+})
