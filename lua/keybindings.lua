@@ -89,3 +89,16 @@ keymap('v', 'rm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opt
 -- This requires java-debug and vscode-java-test bundles, see install steps in this README further below.
 --nnoremap <leader>df <Cmd>lua require'jdtls'.test_class()<CR>
 --nnoremap <leader>dn <Cmd>lua require'jdtls'.test_nearest_method()<CR>
+
+nkeymap("<leader>df", "<Cmd>lua require'jdtls'.test_class()<CR>")
+nkeymap("<leader>df", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>")
+
+nkeymap("<F5>", "<Cmd>lua require'dap'.continue()<CR>")
+nkeymap("<F10>", "<Cmd>lua require'dap'.step_over()<CR>")
+nkeymap("<F11>", "<Cmd>lua require'dap'.step_into()<CR>")
+nkeymap("<F12>", "<Cmd>lua require'dap'.step_out()<CR>")
+nkeymap("<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
+nkeymap("<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+nkeymap("<Leader>lp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
+nkeymap("<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>")
+nkeymap("<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>")
