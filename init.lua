@@ -1,3 +1,4 @@
+require('user.nvim-tree')
 require('user.keymaps')
 require('user.packages')
 require('user.options')

@@ -1,19 +1,17 @@
+M = {}
+local opts = { noremap = true, silent = true }
 local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true }
 
--- Set space to leader
-keymap('', '<space>', '<leader>', {})
 
-keymap('n', '<c-s>', ':w<CR>', {})
-keymap('i', '<c-s>', '<Esc>:w<CR>a', {})
+-- map space as leader key
+keymap('n', '<space>', '', opts)
+vim.g.mapleader = " "
+vim.g.maclocalleader = " "
 
--- New line up/down from insert mode
---keymap('i', '<c-j>', '<Esc>o', opts)
---keymap('i', '<c-k>', '<Esc>O', opts)
-
--- Nerdtree
-keymap('n', '<c-n>', ':NERDTreeToggle<Return>', opts)
-keymap('v', '<c-n>', ':NERDTreeToggle<Return>', opts)
+keymap('n', '<c-s>', ':w<CR>', opts)
+keymap('n', '<leader>w', ':w<CR>', opts)
+keymap('n', '<leader>q', ':q<CR>', opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>', opts)
 
 -- Tagbar
 keymap('n', '<c-b>', ':TagbarToggle<Return>', opts)
@@ -39,11 +37,7 @@ keymap('n', '<a-l>', '<c-w>L', opts)
 
 -- New tab
 keymap('n', '<c-t>', ':tabnew<Return>', opts)
-keymap('i', '<c-t>', ':tabnew<Return>', opts)
-
--- Close tab
 keymap('n', '<c-w>', ':tabc<Return>', opts)
-keymap('i', '<c-w>', ':tabc<Return>', opts)
 
 -- Traverse tabs
 keymap('n', '<c-s-l>', 'gt', opts)
@@ -51,31 +45,26 @@ keymap('v', '<c-s-l>', 'gt', opts)
 keymap('n', '<c-s-h>', 'gT', opts)
 keymap('v', '<c-s-h>', 'gT', opts)
 
--- Keymap for normal mode
-local function nkeymap(key, map)
-	keymap('n', key, map, opts)
-end
-
-nkeymap('gd', ':lua vim.lsp.buf.definition()<cr>')
-nkeymap('gD', ':lua vim.lsp.buf.declaration()<cr>')
-nkeymap('gi', ':lua vim.lsp.buf.implementation()<cr>')
-nkeymap('gw', ':lua vim.lsp.buf.document_symbol()<cr>')
-nkeymap('gw', ':lua vim.lsp.buf.workspace_symbol()<cr>')
-nkeymap('gr', ':lua vim.lsp.buf.references()<cr>')
-nkeymap('gb', ':lua vim.lsp.buf.type_definition()<cr>')
-nkeymap('K', ':lua vim.lsp.buf.hover()<cr>')
--- nkeymap('<c-k>', ':lua vim.lsp.buf.signature_help()<cr>')
-nkeymap('<leader>af', ':lua vim.lsp.buf.code_action()<cr>')
-nkeymap('<leader>rn', ':lua vim.lsp.buf.rename()<cr>')
+keymap('n', 'gd', ':lua vim.lsp.buf.definition()<cr>', opts)
+keymap('n', 'gD', ':lua vim.lsp.buf.declaration()<cr>', opts)
+keymap('n', 'gi', ':lua vim.lsp.buf.implementation()<cr>', opts)
+keymap('n', 'gw', ':lua vim.lsp.buf.document_symbol()<cr>', opts)
+keymap('n', 'gw', ':lua vim.lsp.buf.workspace_symbol()<cr>', opts)
+keymap('n', 'gr', ':lua vim.lsp.buf.references()<cr>', opts)
+keymap('n', 'gb', ':lua vim.lsp.buf.type_definition()<cr>', opts)
+keymap('n', 'K', ':lua vim.lsp.buf.hover()<cr>', opts)
+-- keymap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<cr>', opts)
+keymap('n', '<leader>af', ':lua vim.lsp.buf.code_action()<cr>', opts)
+keymap('n', '<leader>rn', ':lua vim.lsp.buf.rename()<cr>', opts)
 
 -- Formatting
-nkeymap('<leader>fo', ':lua vim.lsp.buf.formatting()<cr>')
+keymap('n', '<leader>fo', ':lua vim.lsp.buf.format { async = true }<cr>', opts)
 
 -- Telescope
-nkeymap('<leader>ff', ':Telescope find_files<cr>')
-nkeymap('<leader>fg', ':Telescope live_grep<cr>')
-nkeymap('<leader>fb', ':Telescope buffers<cr>')
-nkeymap('<leader>fh', ':Telescope oldfiles<cr>')
+keymap('n', '<leader>ff', ':Telescope find_files<cr>', opts)
+keymap('n', '<leader>fg', ':Telescope live_grep<cr>', opts)
+keymap('n', '<leader>fb', ':Telescope buffers<cr>', opts)
+keymap('n', '<leader>fh', ':Telescope oldfiles<cr>', opts)
 
 keymap('n', '<A-o>', "<Cmd>lua require'jdtls'.organize_imports()<CR>", opts)
 keymap('n', 'rv', "<Cmd>lua require('jdtls').extract_variable()<CR>", opts)
@@ -85,20 +74,15 @@ keymap('v', 'rc', "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", o
 keymap('v', 'rm', "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", opts)
 
 
--- If using nvim-dap
--- This requires java-debug and vscode-java-test bundles, see install steps in this README further below.
---nnoremap <leader>df <Cmd>lua require'jdtls'.test_class()<CR>
---nnoremap <leader>dn <Cmd>lua require'jdtls'.test_nearest_method()<CR>
+keymap('n', "<leader>df", "<Cmd>lua require'jdtls'.test_class()<CR>", opts)
+keymap('n', "<leader>df", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>", opts)
 
-nkeymap("<leader>df", "<Cmd>lua require'jdtls'.test_class()<CR>")
-nkeymap("<leader>df", "<Cmd>lua require'jdtls'.test_nearest_method()<CR>")
-
-nkeymap("<F5>", "<Cmd>lua require'dap'.continue()<CR>")
-nkeymap("<F10>", "<Cmd>lua require'dap'.step_over()<CR>")
-nkeymap("<F11>", "<Cmd>lua require'dap'.step_into()<CR>")
-nkeymap("<F12>", "<Cmd>lua require'dap'.step_out()<CR>")
-nkeymap("<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>")
-nkeymap("<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
-nkeymap("<Leader>lp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
-nkeymap("<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>")
-nkeymap("<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>")
+keymap('n', "<F5>", "<Cmd>lua require'dap'.continue()<CR>", opts)
+keymap('n', "<F10>", "<Cmd>lua require'dap'.step_over()<CR>", opts)
+keymap('n', "<F11>", "<Cmd>lua require'dap'.step_into()<CR>", opts)
+keymap('n', "<F12>", "<Cmd>lua require'dap'.step_out()<CR>", opts)
+keymap('n', "<Leader>b", "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", opts)
+keymap('n', "<Leader>B", "<Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", opts)
+keymap('n', "<Leader>lp", "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>", opts)
+keymap('n', "<Leader>dr", "<Cmd>lua require'dap'.repl.open()<CR>", opts)
+keymap('n', "<Leader>dl", "<Cmd>lua require'dap'.run_last()<CR>", opts)

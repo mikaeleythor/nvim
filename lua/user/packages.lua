@@ -13,8 +13,12 @@ require('packer').startup(function()
 		end,
 		ft = {'markdown'},
 	}
-	use 'scrooloose/nerdtree'								-- dirTree
-	use 'ryanoasis/vim-devicons'						-- Icons for DirTree
+	use {																		-- nvim file explorer
+		'nvim-tree/nvim-tree.lua',
+		requires = {
+			'nvim-tree/nvim-web-devicons',
+		},
+	}
 	use 'preservim/nerdcommenter'						-- block commenting
 	use 'preservim/tagbar'									-- tagbar
 	use 'nvim-lualine/lualine.nvim'					-- statusline
