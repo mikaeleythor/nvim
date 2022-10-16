@@ -17,3 +17,7 @@ vim.wo.number = true
 vim.g.syntax_on = true
 vim.g.vimtex_view_method = 'sioyek'
 vim.o.backupcopy = 'yes'
+--vim.opt.foldlevel = 1
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.cmd('filetype plugin on')
