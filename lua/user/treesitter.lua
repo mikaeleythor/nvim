@@ -6,6 +6,10 @@ configs.setup {
 	},
 	highlight = {
 		enable = true,
+		disable = { "markdown" },
+	},
+	autopairs = {
+		enable = true,
 	},
 	indent = {
 		enable = false,
