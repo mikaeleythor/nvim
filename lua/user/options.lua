@@ -21,3 +21,9 @@ vim.o.backupcopy = 'yes'
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.cmd('filetype plugin on')
+
+
+vim.g.catppuccin_flavour = 'mocha'
+require('catppuccin').setup()
+vim.api.nvim_command("colorscheme catppuccin")
+require('colorizer').setup()
