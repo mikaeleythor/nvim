@@ -1,10 +1,8 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-require('lspconfig')['jdtls'].setup {
-	capabilities = capabilities
-}
-require('lspconfig')['sumneko_lua'].setup {
+local lspconfig = require('lspconfig')
+lspconfig['sumneko_lua'].setup {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -27,30 +25,57 @@ require('lspconfig')['sumneko_lua'].setup {
 		},
 	},
 }
-require('lspconfig')['pyright'].setup {
+lspconfig['pylsp'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['jsonls'].setup {
+lspconfig['jsonls'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['marksman'].setup {
+lspconfig['marksman'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['bashls'].setup {
+lspconfig['bashls'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['dockerls'].setup {
+lspconfig['dockerls'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['eslint'].setup {
+--lspconfig['eslint'].setup {
+	--capabilities = capabilities
+--}
+lspconfig['texlab'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['texlab'].setup {
+lspconfig['clangd'].setup {
 	capabilities = capabilities
 }
-require('lspconfig')['clangd'].setup {
-	capabilities = capabilities
+lspconfig['cssls'].setup {
+	capabilities = capabilities,
+	indent = false,
 }
-require('lspconfig')['cssls'].setup {
-	capabilities = capabilities
+-- html lsp server is not needed since it 
+-- doesn't provide formatting or diagnostics
+
+--lspconfig['html'].setup {
+	--capabilities = capabilities,
+--}
+lspconfig['spectral'].setup {
+  capabilities = capabilities
 }
+lspconfig['sqlls'].setup {
+	capabilities = capabilities,
+}
+lspconfig['emmet_ls'].setup {
+	capabilities = capabilities,
+	--capabilities.textDocument.completion.completionItem.snippetSupport = true
+	filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+	init_options = {
+		html = {
+			options = {
+				-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+				["bem.enabled"] = true,
+			},
+		},
+	}
+}
+
