@@ -25,11 +25,12 @@ wk.register({
 		r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 	},
 }, opts)
+
 wk.register({
 
 	p = {
 		name = "+plugins",
-		u = { "<cmd>PackerUpdate<cr>", "Update plugins" },
+		u = { "<cmd>PackerUpdate<cr>", "Update plugins" }, 
 		c = { "<cmd>PackerCompile<cr>", "Compile plugins" },
 	},
 }, opts)
@@ -42,6 +43,5 @@ wk.register({
 		v = { "<cmd>ToggleTerm direction=vertical<cr>", "Spawn vertical terminal" },
 		l = { "<cmd>ToggleTermSendVisualLines<cr>", "Send visual lines" },
 		c = { "<cmd>ToggleTermSendCurrentLine<cr>", "Send current line" },
-
 	},
 }, opts)
