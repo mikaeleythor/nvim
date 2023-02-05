@@ -1,8 +1,15 @@
-local configs = require 'nvim-treesitter.configs'
+local configs = require("nvim-treesitter.configs")
 
-configs.setup {
+configs.setup({
 	ensure_installed = {
-		maintained = true,
+		"python",
+		"java",
+		"javascript",
+		"html",
+		"css",
+		"lua",
+		"dockerfile",
+		"bash",
 	},
 	highlight = {
 		enable = true,
@@ -11,7 +18,11 @@ configs.setup {
 	autopairs = {
 		enable = true,
 	},
+	autotag = {
+		enable = true,
+	},
 	indent = {
-		enable = false,
-	}
-}
+		enable = true,
+		disable = { "python", "html", "css", "sql" },
+	},
+})
