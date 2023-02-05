@@ -1,7 +1,11 @@
 require("packer").startup(function(use)
 	-- my plugins
 	use("wbthomason/packer.nvim") -- have packer manage itself
-	use("NvChad/nvim-colorizer.lua") -- hex coloriser (e.g. red #FFFFFF)
+	use({ "NvChad/nvim-colorizer.lua",
+		config = function()
+			require('colorizer').setup()
+		end
+	}) -- hex coloriser (e.g. red #FFFFFF)
 	use("windwp/nvim-autopairs") -- autoclosing brackets plugin
 	use("lervag/vimtex") -- LaTeX compiler
 	use("iamcco/markdown-preview.nvim")
@@ -33,10 +37,11 @@ require("packer").startup(function(use)
 	})
 	use({
 		"folke/which-key.nvim",
-		config = function ()
+		config = function()
 			require('which-key').setup()
 		end
 	})
+	use('fedepujol/move.nvim')
 
 	-- colorschemes
 	use({
@@ -46,6 +51,9 @@ require("packer").startup(function(use)
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
+		config = function()
+			require("catppuccin").setup()
+		end,
 	})
 
 	-- treesitter
