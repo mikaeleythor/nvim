@@ -2,7 +2,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 local lspconfig = require('lspconfig')
-lspconfig['sumneko_lua'].setup {
+lspconfig['lua_ls'].setup {
 	capabilities = capabilities,
 	settings = {
 		Lua = {
@@ -40,8 +40,12 @@ lspconfig['bashls'].setup {
 lspconfig['dockerls'].setup {
 	capabilities = capabilities
 }
+lspconfig['tsserver'].setup {
+	capabilities = capabilities,
+}
 --lspconfig['eslint'].setup {
-	--capabilities = capabilities
+--capabilities = capabilities,
+--filetypes = { "javascript" }
 --}
 lspconfig['texlab'].setup {
 	capabilities = capabilities
@@ -53,17 +57,14 @@ lspconfig['cssls'].setup {
 	capabilities = capabilities,
 	indent = false,
 }
--- html lsp server is not needed since it 
+-- html lsp server is not needed since it
 -- doesn't provide formatting or diagnostics
 
 --lspconfig['html'].setup {
-	--capabilities = capabilities,
+--capabilities = capabilities,
 --}
 lspconfig['spectral'].setup {
-  capabilities = capabilities
-}
-lspconfig['sqlls'].setup {
-	capabilities = capabilities,
+	capabilities = capabilities
 }
 lspconfig['emmet_ls'].setup {
 	capabilities = capabilities,
@@ -78,4 +79,9 @@ lspconfig['emmet_ls'].setup {
 		},
 	}
 }
-
+lspconfig['sqls'].setup {
+	on_attach = function(client, bufnr)
+		require('sqls').on_attach(client, bufnr)
+	end,
+	--capabilities = capabilities,
+}
