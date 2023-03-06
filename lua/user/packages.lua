@@ -1,15 +1,17 @@
 require("packer").startup(function(use)
 	-- my plugins
 	use("wbthomason/packer.nvim") -- have packer manage itself
-	use({ "NvChad/nvim-colorizer.lua",
+	use({
+		"NvChad/nvim-colorizer.lua",
 		config = function()
-			require('colorizer').setup()
+			require('colorizer').setup({})
 		end
 	}) -- hex coloriser (e.g. red #FFFFFF)
 	use("windwp/nvim-autopairs") -- autoclosing brackets plugin
 	use("lervag/vimtex") -- LaTeX compiler
 	use("iamcco/markdown-preview.nvim")
-	use({ -- nvim file explorer
+	use({
+		-- nvim file explorer
 		"nvim-tree/nvim-tree.lua",
 		requires = {
 			"nvim-tree/nvim-web-devicons",
@@ -42,6 +44,40 @@ require("packer").startup(function(use)
 		end
 	})
 	use('fedepujol/move.nvim')
+	use("mfussenegger/nvim-lint")
+	use {
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup {}
+		end
+	}
+	use {
+		'jedrzejboczar/possession.nvim',
+		requires = { 'nvim-lua/plenary.nvim' },
+	}
+	use {
+		'lewis6991/gitsigns.nvim',
+		config = function()
+			require('gitsigns').setup()
+		end
+	}
+
+	use({
+		"folke/noice.nvim",
+		config = function()
+			require("noice").setup(require("user.noice"))
+		end,
+		requires = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		}
+	})
+	use 'nanotee/sqls.nvim'
 
 	-- colorschemes
 	use({
@@ -63,7 +99,8 @@ require("packer").startup(function(use)
 	})
 
 	-- telescope
-	use({ -- Fuzzy finder plugin
+	use({
+		-- Fuzzy finder plugin
 		"nvim-telescope/telescope.nvim",
 		commit = "76ea9a898d3307244dce3573392dcf2cc38f340f",
 		tag = "0.1.0",
