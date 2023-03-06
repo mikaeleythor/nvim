@@ -23,6 +23,6 @@ configs.setup({
 	},
 	indent = {
 		enable = true,
-		disable = { "python", "html", "css", "sql" },
+		disable = { "html", "css", "sql", "tex", "js", "javascript" },
 	},
 })
