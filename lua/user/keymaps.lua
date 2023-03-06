@@ -6,6 +6,8 @@ keymap("n", "<space>", "", opts)
 vim.g.mapleader = " "
 vim.g.maclocalleader = " "
 
+keymap("i", "<c-BS>", "<c-w>", opts)
+
 -- Move selection up/down
 keymap('n', '<A-j>', ':MoveLine(1)<CR>', opts)
 keymap('n', '<A-k>', ':MoveLine(-1)<CR>', opts)
@@ -50,3 +52,16 @@ keymap("n", "gb", ":lua vim.lsp.buf.type_definition()<cr>", opts)
 keymap("n", "K", ":lua vim.lsp.buf.hover()<cr>", opts)
 keymap("n", "<leader>af", ":lua vim.lsp.buf.code_action()<cr>", opts)
 -- keymap('n', '<c-k>', ':lua vim.lsp.buf.signature_help()<cr>', opts)
+
+function _G.set_terminal_keymaps()
+  local topts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], topts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], topts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], topts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], topts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], topts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], topts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
