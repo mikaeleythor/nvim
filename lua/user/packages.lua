@@ -65,9 +65,10 @@ require("packer").startup(function(use)
 
 	use({
 		"folke/noice.nvim",
-		config = function()
-			require("noice").setup(require("user.noice"))
-		end,
+		commit = "92b058a",
+		--config = function()
+		--require("noice").setup(require("user.noice"))
+		--end,
 		requires = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
@@ -110,7 +111,10 @@ require("packer").startup(function(use)
 			"sharkdp/fd",
 		},
 	})
-
+	use {
+		"nvim-telescope/telescope-file-browser.nvim",
+		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+	}
 	-- LSP
 	use("williamboman/mason.nvim") -- LSP installer
 	use("jose-elias-alvarez/null-ls.nvim")
