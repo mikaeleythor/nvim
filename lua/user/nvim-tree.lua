@@ -9,7 +9,6 @@ local on_attach = function(bufnr)
 		return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
 	end
 
-	vim.keymap.set('n', '<C-n>', api.tree.change_root_to_node, opts('CD'))
 	vim.keymap.set('n', '<C-e>', api.node.open.replace_tree_buffer, opts('Open: In Place'))
 	vim.keymap.set('n', '<C-k>', api.node.show_info_popup, opts('Info'))
 	vim.keymap.set('n', '<C-r>', api.fs.rename_sub, opts('Rename: Omit Filename'))
@@ -61,24 +60,25 @@ local on_attach = function(bufnr)
 	vim.keymap.set('n', 'Y', api.fs.copy.relative_path, opts('Copy Relative Path'))
 	vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit, opts('Open'))
 	vim.keymap.set('n', '<2-RightMouse>', api.tree.change_root_to_node, opts('CD'))
-	--vim.keymap.set('n', 'p', api.tree.change_root_to_node, opts('CD'))
+	vim.keymap.set('n', 'p', api.tree.change_root_to_node, opts('CD'))
 	-- END_DEFAULT_ON_ATTACH
 end
 local nvim_tree = require("nvim-tree")
 nvim_tree.setup({
-	sort_by = "case_sensitive",
 	view = {
 		adaptive_size = false,
-		mappings = {
-			list = {
-				{ key = "u", action = "dir_up" },
-			},
-		},
+		--mappings = {
+			--list = {
+				--{ key = "u", action = "dir_up" },
+			--},
+		--},
 	},
 	update_focused_file = {
 		enable = true,
 		update_root = true,
 	},
-	prefer_startup_root = true,
+	hijack_cursor = true,
+	sync_root_with_cwd = true,
+	respect_buf_cwd = true,
 	on_attach = on_attach
 })
