@@ -1,8 +1,8 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		"sqlls",
-		"pylsp",
+		--"sqlls",
+		--"pylsp",
 		--"eslint",
 		--"html", --, "stylua", "prettier", "autopep8"
 	},
@@ -11,10 +11,11 @@ local null_ls = require("null-ls")
 local my_sources = {
 	--null_ls.builtins.formatting.stylua,
 	null_ls.builtins.formatting.prettier, -- This works out-of-box with css
+	--null_ls.builtins.formatting.sqlformat,
 	--null_ls.builtins.diagnostics.codespell,
 	--null_ls.builtins.diagnostics.eslint_d,
 	--null_ls.builtins.diagnostics.gitlint,
-	--null_ls.builtins.diagnostics.mlint,
+	null_ls.builtins.diagnostics.mlint,
 	--null_ls.builtins.diagnostics.shellcheck,
 	--null_ls.builtins.diagnostics.yamllint,
 	--null_ls.builtins.diagnostics.zsh,
