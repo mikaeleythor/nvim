@@ -1,5 +1,7 @@
 vim.bo.autoindent = true
 
+vim.opt.termguicolors = true
+
 -- Linewidth
 vim.wo.cc = "80"
 
