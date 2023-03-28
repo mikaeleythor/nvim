@@ -7,16 +7,18 @@ local wk = require("which-key")
 wk.register({
 	w = { "<cmd>w<cr>", "Write" },
 	q = { "<cmd>q<cr>", "Quit" },
-	e = { "<cmd>NvimTreeToggle<cr>", "File tree" },
+	e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
 	n = { "<cmd>enew<cr>", "New file" },
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 	f = {
-		name = "+file",
-		f = { "<cmd>Telescope find_files<cr>", "Find file" },
+		name = "+files",
+		f = { "<cmd>Telescope find_files<cr>", "Local files" },
+		h = { "<cmd>Telescope file_browser path=~ <cr>", "File browser" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
-		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
 		n = { "<cmd>enew<cr>", "New file" },
-		d = { "<cmd>e ~/.repos/dotfiles<cr>", "Open Dotfiles" },
+		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
+		c = { "<cmd>e ~/.repos/shell-scripts/src/bash<cr>", "Shell scripts" },
+		d = { "<cmd>e ~/.repos/dotfiles<cr>", "Dotfiles" },
 		l = { "<cmd>e ~/.repos/nvim<cr>", "Open NVIM Config" },
 		i = { "<cmd>source ~/.config/nvim/init.lua<cr>", "Source dotfiles" },
 	},
@@ -33,6 +35,7 @@ wk.register({
 		s = { "<cmd>Telescope git_status<cr>", "Git status" },
 		c = { "<cmd>Telescope git_commits<cr>", "Git commits" },
 		b = { "<cmd>Telescope git_branches<cr>", "Git branches" },
+		d = { "<cmd>Telescope git_bcommits<cr>", "Git diff current buffer" },
 	},
 	l = {
 		name = "+lsp",
@@ -43,6 +46,12 @@ wk.register({
 		t = { "<cmd>Telescope lsp_type_definitions<cr>", "LSP type definitions" },
 		i = { "<cmd>LspInfo<cr>", "LSP info" },
 
+	},
+	d = {
+		name = "+todo",
+		t = {"<cmd>TodoTelescope<cr>", "Todo Telescope"},
+		n = {"<cmd>lua require('todo-comments').jump_next({keywords={'ERROR','WARNING','TODO', 'TEST'}})<cr>", "Next todo"},
+		p = {"<cmd>lua require('todo-comments').jump_prev({keywords={'ERROR','WARNING','TODO'}})<cr>", "Next todo"},
 	},
 	p = {
 		name = "+plugins",
