@@ -3,7 +3,7 @@ vim.opt_local.tabstop = 2
 vim.opt_local.cmdheight = 2
 --require 'jdtls_setup'.setup()
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' })
+local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', '.gitignore'})
 local home = os.getenv('HOME')
 local workspace_dir = home .. "/.workspace" .. project_name
 --local jar_patterns = {
@@ -13,9 +13,7 @@ local workspace_dir = home .. "/.workspace" .. project_name
 
 --local bundles = {}
 --for _, jar_pattern in ipairs(jar_patterns) do
---for _, bundle in ipairs(vim.split(vim.fn.glob(home .. jar_pattern), '\n')) do
---if not vim.endswith(bundle, 'com.microsoft.java.test.runner.jar') then
---table.insert(bundles, bundle)
+--for _, bundle in ipairs(vim.split(vim.fn.glob(home .. jar_pattern), '\n')) do if not vim.endswith(bundle, 'com.microsoft.java.test.runner.jar') then table.insert(bundles, bundle)
 --end
 --end
 --end
