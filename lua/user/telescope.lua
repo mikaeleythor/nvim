@@ -1,6 +1,11 @@
 local telescope = require("telescope")
 local fb_actions = telescope.extensions.file_browser.actions
 telescope.setup({
+	defaults = {
+		file_ignore_patterns = {
+			"node_modules"
+		}
+	},
 	extensions = {
 		file_browser = {
 			hijack_netrw = true,
