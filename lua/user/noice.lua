@@ -1,3 +1,5 @@
+vim.o.shortmess = "s"
+vim.opt.shortmess:append("S")
 require("noice").setup({
 	lsp = {
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -40,14 +42,13 @@ require("noice").setup({
 			},
 			opts = { skip = true },
 		},
-		--{
-		--filter = {
-		--event = "msg_showmode",
-		--kind = "",
-		--find = "insert",
-		--},
-		--opts = { skip = true },
-		--},
+		{
+			filter = {
+				event = "msg_show",
+				kind = "search_count",
+			},
+			opts = { skip = true },
+		},
 		{
 			view = "notify",
 			filter = {
