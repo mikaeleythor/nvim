@@ -62,13 +62,17 @@ require("packer").startup(function(use)
 			require('gitsigns').setup()
 		end
 	}
-	use({"lukas-reineke/indent-blankline.nvim",
-		config = function()
-			require("indent-blankline").setup {
-				show_current_context = true,
-				show_current_context_start = true,
-			}
-		end
+	use({"lukas-reineke/indent-blankline.nvim"
+		--config = function()
+			--require("indent-blankline").setup {
+				--show_current_context = true,
+				--show_current_context_start = true,
+			--}
+		--end
+	})
+	use({
+		'nmac427/guess-indent.nvim',
+		config = function() require('guess-indent').setup {} end,
 	})
 
 	use({
@@ -78,21 +82,17 @@ require("packer").startup(function(use)
 		--require("noice").setup(require("user.noice"))
 		--end,
 		requires = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
 			"rcarriga/nvim-notify",
 		}
 	})
 	use 'nanotee/sqls.nvim'
 
 	-- colorschemes
-	use({
-		"folke/tokyonight.nvim",
-		commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764",
-	})
+	--use({
+		--"folke/tokyonight.nvim",
+		--commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764",
+	--})
 	use({
 		"catppuccin/nvim",
 		as = "catppuccin",
@@ -109,10 +109,9 @@ require("packer").startup(function(use)
 
 	-- telescope
 	use({
-		-- Fuzzy finder plugin
 		"nvim-telescope/telescope.nvim",
-		commit = "76ea9a898d3307244dce3573392dcf2cc38f340f",
-		tag = "0.1.0",
+		--commit = "76ea9a898d3307244dce3573392dcf2cc38f340f",
+		--tag = "0.1.0",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"BurntSushi/ripgrep",
@@ -126,7 +125,6 @@ require("packer").startup(function(use)
 	-- LSP
 	use("williamboman/mason.nvim") -- LSP installer
 	use("jose-elias-alvarez/null-ls.nvim")
-	--use("jayp0521/mason-null-ls.nvim")
 	use("williamboman/mason-lspconfig.nvim") -- Recommended plugin with lspconfig
 	use("neovim/nvim-lspconfig") -- LSP configuration
 	use("mfussenegger/nvim-jdtls") -- LSP extensions for eclipse.jdt.ls

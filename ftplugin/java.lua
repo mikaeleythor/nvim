@@ -1,6 +1,6 @@
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
-vim.opt_local.cmdheight = 2
+--vim.opt_local.shiftwidth = 2
+--vim.opt_local.tabstop = 2
+--vim.opt_local.cmdheight = 2
 --require 'jdtls_setup'.setup()
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
 local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', '.gitignore'})
