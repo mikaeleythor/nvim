@@ -62,14 +62,7 @@ require("packer").startup(function(use)
 			require('gitsigns').setup()
 		end
 	}
-	use({"lukas-reineke/indent-blankline.nvim"
-		--config = function()
-			--require("indent-blankline").setup {
-				--show_current_context = true,
-				--show_current_context_start = true,
-			--}
-		--end
-	})
+	use({ "lukas-reineke/indent-blankline.nvim" })
 	use({
 		'nmac427/guess-indent.nvim',
 		config = function() require('guess-indent').setup {} end,
@@ -90,8 +83,8 @@ require("packer").startup(function(use)
 
 	-- colorschemes
 	--use({
-		--"folke/tokyonight.nvim",
-		--commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764",
+	--"folke/tokyonight.nvim",
+	--commit = "66bfc2e8f754869c7b651f3f47a2ee56ae557764",
 	--})
 	use({
 		"catppuccin/nvim",
