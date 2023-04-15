@@ -10,6 +10,7 @@ wk.register({
 	e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
 	n = { "<cmd>enew<cr>", "New file" },
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+	h = { ":set invhlsearch<cr>", "Toggle search highlights"},
 	f = {
 		name = "+files",
 		f = { "<cmd>Telescope find_files<cr>", "Local files" },
