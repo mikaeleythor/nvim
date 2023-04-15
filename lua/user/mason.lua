@@ -17,6 +17,7 @@ local my_sources = {
 	--null_ls.builtins.diagnostics.gitlint,
 	null_ls.builtins.diagnostics.mlint,
 	--null_ls.builtins.diagnostics.shellcheck,
+	null_ls.builtins.formatting.beautysh,
 	--null_ls.builtins.diagnostics.yamllint,
 	--null_ls.builtins.diagnostics.zsh,
 	--null_ls.builtins.formatting.beautysh,
