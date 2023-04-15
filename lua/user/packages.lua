@@ -62,6 +62,14 @@ require("packer").startup(function(use)
 			require('gitsigns').setup()
 		end
 	}
+	use({"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			require("indent-blankline").setup {
+				show_current_context = true,
+				show_current_context_start = true,
+			}
+		end
+	})
 
 	use({
 		"folke/noice.nvim",
