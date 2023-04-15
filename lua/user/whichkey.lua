@@ -17,6 +17,7 @@ wk.register({
 		r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
 		n = { "<cmd>enew<cr>", "New file" },
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
+		g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
 		c = { "<cmd>e ~/.repos/shell-scripts/src/bash<cr>", "Shell scripts" },
 		d = { "<cmd>e ~/.repos/dotfiles<cr>", "Dotfiles" },
 		l = { "<cmd>e ~/.repos/nvim<cr>", "Open NVIM Config" },
