@@ -134,5 +134,3 @@ return {
 		footer = { "yummers" }, --your footer
 	},
 }
-
---}
