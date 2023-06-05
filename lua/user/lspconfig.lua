@@ -79,9 +79,34 @@ lspconfig['emmet_ls'].setup {
 		},
 	}
 }
-lspconfig['sqls'].setup {
-	on_attach = function(client, bufnr)
-		require('sqls').on_attach(client, bufnr)
-	end,
-	--capabilities = capabilities,
+--lspconfig['sqls'].setup {
+	--on_attach = function(client, bufnr)
+		--require('sqls').on_attach(client, bufnr)
+	--end,
+	----capabilities = capabilities,
+--}
+
+-- When the arduino server starts in these directories, use the provided FQBN.
+-- Note that the server needs to start exactly in these directories.
+-- This example would require some extra modification to support applying the FQBN on subdirectories!
+local my_arduino_fqbn = {
+    ["/home/cinder/engx/3week/data-transmission"] = "arduino:avr:feather32u4",
+}
+
+local DEFAULT_FQBN = "arduino:avr:feather32u4"
+
+lspconfig.arduino_language_server.setup {
+    on_new_config = function (config, root_dir)
+        local fqbn = my_arduino_fqbn[root_dir]
+        if not fqbn then
+            vim.notify(("Could not find which FQBN to use in %q. Defaulting to %q."):format(root_dir, DEFAULT_FQBN))
+            fqbn = DEFAULT_FQBN
+        end
+        config.cmd = {
+            "arduino-language-server",
+            "-cli-config", "/home/cinder/.arduino15/arduino-cli.yaml",
+            "-fqbn",
+            fqbn
+        }
+    end
 }
