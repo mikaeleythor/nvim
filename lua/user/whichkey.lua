@@ -7,12 +7,13 @@ local wk = require("which-key")
 wk.register({
 	w = { "<cmd>w<cr>", "Write" },
 	q = { "<cmd>q<cr>", "Quit" },
-	e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
+	--e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
 	n = { "<cmd>enew<cr>", "New file" },
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 	h = { ":set invhlsearch<cr>", "Toggle search highlights"},
 	f = {
 		name = "+files",
+		e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
 		f = { "<cmd>Telescope find_files<cr>", "Local files" },
 		h = { "<cmd>Telescope file_browser path=~ <cr>", "File browser" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },

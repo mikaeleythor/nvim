@@ -38,7 +38,7 @@ require("noice").setup({
 			filter = {
 				event = "msg_show",
 				kind = "",
-				find = "written",
+				--find = "written",
 			},
 			opts = { skip = true },
 		},
