@@ -22,6 +22,7 @@ require("packer").startup(function(use)
 	use("nvim-lualine/lualine.nvim") -- statusline
 	use({
 		"glepnir/dashboard-nvim",
+		commit = "0af0ad1",
 		event = "VimEnter",
 		config = function()
 			require("dashboard").setup(require("user.dashboard"))
@@ -70,16 +71,18 @@ require("packer").startup(function(use)
 
 	use({
 		"folke/noice.nvim",
-		commit = "92b058a",
-		--config = function()
-		--require("noice").setup(require("user.noice"))
-		--end,
+		commit = "ed7bbe0",
 		requires = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		}
 	})
 	use 'nanotee/sqls.nvim'
+	use 'ekickx/clipboard-image.nvim'
+	use({
+		"sindrets/diffview.nvim",
+		commit = "f9ddbe7"
+	})
 
 	-- colorschemes
 	--use({
