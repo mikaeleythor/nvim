@@ -30,11 +30,6 @@ vim.bo.expandtab = true
 -- This sets the clipboard to global
 vim.go.clipboard = "unnamedplus"
 
--- This should be default everywhere
-vim.bo.tabstop = 2
-vim.bo.shiftwidth = 2
-vim.bo.softtabstop = 2
-
 -- Show number of current line
 vim.wo.number = true
 vim.g.syntax_on = true
@@ -60,3 +55,4 @@ vim.api.nvim_command("colorscheme catppuccin")
 -- Vimtex pdf viewer
 vim.g.vimtex_view_method = "sioyek"
 
+vim.g.indentLine_fileTypeExclude = {'dashboard', 'startify'}
