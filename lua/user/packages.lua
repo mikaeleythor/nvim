@@ -68,7 +68,27 @@ require("packer").startup(function(use)
 		'nmac427/guess-indent.nvim',
 		config = function() require('guess-indent').setup {} end,
 	})
-
+	use {
+		"nvim-neorg/neorg",
+		commit = '67c729f',
+		config = function()
+			require('neorg').setup {
+				load = {
+					["core.defaults"] = {}, -- Loads default behaviour
+					["core.concealer"] = {}, -- Adds pretty icons to your documents
+					["core.dirman"] = { -- Manages Neorg workspaces
+						config = {
+							workspaces = {
+								notes = "~/notes",
+							},
+						},
+					},
+				},
+			}
+		end,
+		run = ":Neorg sync-parsers",
+		requires = "nvim-lua/plenary.nvim",
+	}
 	use({
 		"folke/noice.nvim",
 		commit = "ed7bbe0",
