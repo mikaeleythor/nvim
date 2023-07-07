@@ -56,3 +56,5 @@ vim.api.nvim_command("colorscheme catppuccin")
 vim.g.vimtex_view_method = "sioyek"
 
 vim.g.indentLine_fileTypeExclude = {'dashboard', 'startify'}
+
+vim.g.foldlevelstart = 99
