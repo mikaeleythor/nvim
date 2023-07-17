@@ -51,6 +51,16 @@ return {
 				key_hl = "Number",
 			},
 			{
+				icon = " ",
+				icon_hl = "Title",
+				desc = "Neorg                                   ",
+				desc_hl = "String",
+				action = "tcd ~/Documents/notes/linux | Neorg workspace linux",
+				key = "w",
+				keymap = "SPC f w",
+				key_hl = "Number",
+			},
+			{
 				icon = " ",
 				icon_hl = "Title",
 				desc = "Most recent session                   ",
@@ -78,7 +88,7 @@ return {
 				key = "l",
 				keymap = "SPC f l",
 				key_hl = "Number",
-				action = ":e ~/.repos/nvim",
+				action = "cd ~/.repos/nvim | Telescope find_files",
 			},
 			{
 				icon = " ",
@@ -88,7 +98,7 @@ return {
 				key = "d",
 				keymap = "SPC f d",
 				key_hl = "Number",
-				action = ":e ~/.repos/dotfiles",
+				action = "cd ~/.repos/dotfiles | Telescope find_files",
 			},
 			{
 				icon = " ",
@@ -98,7 +108,7 @@ return {
 				key = "c",
 				keymap = "SPC f c",
 				key_hl = "Number",
-				action = ":e ~/.repos/shell-scripts/src/bash",
+				action = "cd ~/.repos/shell-scripts/src/bash | Telescope find_files",
 			},
 			{
 				icon = " ",
@@ -118,7 +128,7 @@ return {
 				key = "u",
 				keymap = "SPC p u",
 				key_hl = "Number",
-				action = "PackerSync"
+				action = "Lazy update"
 			},
 			{
 				icon = 'Q ',
