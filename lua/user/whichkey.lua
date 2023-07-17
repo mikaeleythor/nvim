@@ -7,22 +7,39 @@ local wk = require("which-key")
 wk.register({
 	w = { "<cmd>w<cr>", "Write" },
 	q = { "<cmd>q<cr>", "Quit" },
-	--e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
-	n = { "<cmd>enew<cr>", "New file" },
+	e = { "<cmd>e<cr>", "Open" },
+	n = {
+		name = "+notes",
+		--l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
+		l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
+		s = { "<cmd>Neorg workspace school<cr>", "School notebook" },
+		w = { function ()
+			vim.cmd("tcd ~/Documents/notes/work")
+			vim.cmd("Neorg workspace work")
+		end, "Work notebook" },
+	},
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 	h = { ":set invhlsearch<cr>", "Toggle search highlights"},
 	f = {
 		name = "+files",
-		e = { "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>", "File browser" },
+		e = { ":Oil --float<cr>", "File browser"},
 		f = { "<cmd>Telescope find_files<cr>", "Local files" },
-		h = { "<cmd>Telescope file_browser path=~ <cr>", "File browser" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
 		n = { "<cmd>enew<cr>", "New file" },
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
 		g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-		c = { "<cmd>e ~/.repos/shell-scripts/src/bash<cr>", "Shell scripts" },
-		d = { "<cmd>e ~/.repos/dotfiles<cr>", "Dotfiles" },
-		l = { "<cmd>e ~/.repos/nvim<cr>", "Open NVIM Config" },
+		c = { function ()
+			require("telescope.builtin").find_files({search_dirs = {"~/.repos/shell-scripts/src/bash" }})
+		end,
+ 		"Shell scripts" },
+		d = { function ()
+			require("telescope.builtin").find_files({search_dirs = {"~/.repos/dotfiles" }})
+		end,
+ 		"Dotfiles" },
+		l = { function ()
+			require("telescope.builtin").find_files({search_dirs = {"~/.repos/nvim" }})
+		end,
+		 "Open NVIM Config" },
 		i = { "<cmd>source ~/.config/nvim/init.lua<cr>", "Source dotfiles" },
 	},
 	s = {
