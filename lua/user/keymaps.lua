@@ -4,7 +4,7 @@ local keymap = vim.api.nvim_set_keymap
 -- map space as leader key
 keymap("n", "<space>", "", opts)
 vim.g.mapleader = " "
-vim.g.maclocalleader = " "
+vim.g.maplocalleader = 'æ'
 
 keymap("i", "<c-BS>", "<c-w>", opts)
 
