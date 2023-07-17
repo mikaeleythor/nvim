@@ -1,6 +1,7 @@
 local configs = require("nvim-treesitter.configs")
 
 configs.setup({
+	-- TODO: Revise
 	ensure_installed = {
 		"python",
 		"java",
@@ -13,16 +14,18 @@ configs.setup({
 	},
 	highlight = {
 		enable = true,
-		disable = { "markdown" },
+		disable = { "markdown", "tex"},
 	},
+	-- TODO: Disable this in favor of nvim-autopairs
 	autopairs = {
 		enable = true,
 	},
 	autotag = {
 		enable = true,
 	},
+	-- TODO: Disable this in favor of guess-indent
 	indent = {
 		enable = true,
-		disable = { "html", "css", "sql", "tex", "js", "javascript" },
+		disable = { "html", "css", "sql", "tex", "js", "md", "norg"},
 	},
 })
