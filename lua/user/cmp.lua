@@ -98,6 +98,7 @@ cmp.setup {
 	-- TODO: Configure max_item_count
 	sources = cmp.config.sources({
 		--{ name = 'luasnip', option = { use_show_condition = false }},
+		{ name = 'codeium' },
 		{ name = 'luasnip' },
 		{ name = 'nvim_lsp' },
 		{ name = 'path' },
@@ -115,6 +116,7 @@ cmp.setup {
 				nvim_lua = "[api]",
 				path = "[path]",
 				luasnip = "[snip]",
+				Codeium = "[codeium]";
 			},
 		},
 	},
