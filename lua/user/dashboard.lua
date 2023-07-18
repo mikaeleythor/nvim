@@ -1,9 +1,12 @@
 local getKanyeQuote = function()
-	local handle = io.popen('curl -s https://api.kanye.rest/ | awk -F \':\' \'{print $2}\' | sed \'s/["}]//g\'')
-	local output = handle:read('*a')
-	local quote = output:gsub('[\n\r]', ' ')
+	local lines = {}
+	local handle = io.popen('kanye')
+	local quote = handle:read('*a')
 	handle:close()
-	return quote
+	for i in quote:gmatch("([^\n]*)\n?") do
+		table.insert(lines, (string.gsub(i, '[\n]', '')))
+	end
+	return lines
 end
 
 local quote = getKanyeQuote() or 'Old Kanye'
@@ -150,7 +153,7 @@ local M = {
 				action = ":quit"
 			}
 		},
-		footer = {quote},
+		footer = quote,
 	},
 }
 return M
