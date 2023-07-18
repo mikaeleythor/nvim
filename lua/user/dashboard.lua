@@ -1,4 +1,13 @@
-return {
+local getKanyeQuote = function()
+	local handle = io.popen('curl -s https://api.kanye.rest/ | awk -F \':\' \'{print $2}\' | sed \'s/["}]//g\'')
+	local output = handle:read('*a')
+	local quote = output:gsub('[\n\r]', ' ')
+	handle:close()
+	return quote
+end
+
+local quote = getKanyeQuote() or 'Old Kanye'
+local M = {
 	theme = "doom",
 	config = {
 		header = {
@@ -141,6 +150,7 @@ return {
 				action = ":quit"
 			}
 		},
-		footer = { "yummers" }, --your footer
+		footer = {quote},
 	},
 }
+return M
