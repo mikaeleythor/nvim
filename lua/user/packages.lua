@@ -23,6 +23,7 @@ return {
 		-- NOTE: Setting priority to make sure it loads before indent-blankline
 		--priority = 1000,
 		event = "VimEnter",
+		priority = 100,
 		lazy = false,
 		config = function()
 			vim.g.indentLine_fileTypeExclude = { 'dashboard', 'startify' }
@@ -62,7 +63,7 @@ return {
 			require('gitsigns').setup()
 		end
 	},
-	{ "lukas-reineke/indent-blankline.nvim", lazy = false },
+	{ "lukas-reineke/indent-blankline.nvim", lazy = false, priority = 99 },
 	--{ 'giusgad/hologram.nvim', config = function()
 	--require('hologram').setup {
 	--auto_display = true,
