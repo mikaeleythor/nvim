@@ -1,9 +1,9 @@
 require('possession').setup {
-    commands = {
-        save = 'SSave',
-        load = 'SLoad',
-        delete = 'SDelete',
-        list = 'SList',
-				close = 'SClose',
-    }
+	commands = {
+		save = 'SSave',
+		load = 'SLoad',
+		delete = 'SDelete',
+		list = 'SList',
+		close = 'SClose',
+	}
 }

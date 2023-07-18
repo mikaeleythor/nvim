@@ -14,7 +14,7 @@ configs.setup({
 	},
 	highlight = {
 		enable = true,
-		disable = { "markdown", "tex"},
+		disable = { "markdown", "tex" },
 	},
 	-- TODO: Disable this in favor of nvim-autopairs
 	autopairs = {
@@ -26,6 +26,6 @@ configs.setup({
 	-- TODO: Disable this in favor of guess-indent
 	indent = {
 		enable = true,
-		disable = { "html", "css", "sql", "tex", "js", "md", "norg"},
+		disable = { "html", "css", "sql", "tex", "js", "md", "norg", "lua" },
 	},
 })

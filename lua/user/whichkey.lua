@@ -13,33 +13,33 @@ wk.register({
 		--l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
 		l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
 		s = { "<cmd>Neorg workspace school<cr>", "School notebook" },
-		w = { function ()
+		w = { function()
 			vim.cmd("tcd ~/Documents/notes/work")
 			vim.cmd("Neorg workspace work")
 		end, "Work notebook" },
 	},
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
-	h = { ":set invhlsearch<cr>", "Toggle search highlights"},
+	h = { ":set invhlsearch<cr>", "Toggle search highlights" },
 	f = {
 		name = "+files",
-		e = { ":Oil --float<cr>", "File browser"},
+		e = { ":Oil --float<cr>", "File browser" },
 		f = { "<cmd>Telescope find_files<cr>", "Local files" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Recent files" },
 		n = { "<cmd>enew<cr>", "New file" },
 		b = { "<cmd>Telescope buffers<cr>", "Find buffer" },
 		g = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-		c = { function ()
-			require("telescope.builtin").find_files({search_dirs = {"~/.repos/shell-scripts/src/bash" }})
+		c = { function()
+			require("telescope.builtin").find_files({ search_dirs = { "~/.repos/shell-scripts/src/bash" } })
 		end,
- 		"Shell scripts" },
-		d = { function ()
-			require("telescope.builtin").find_files({search_dirs = {"~/.repos/dotfiles" }})
+			"Shell scripts" },
+		d = { function()
+			require("telescope.builtin").find_files({ search_dirs = { "~/.repos/dotfiles" } })
 		end,
- 		"Dotfiles" },
-		l = { function ()
-			require("telescope.builtin").find_files({search_dirs = {"~/.repos/nvim" }})
+			"Dotfiles" },
+		l = { function()
+			require("telescope.builtin").find_files({ search_dirs = { "~/.repos/nvim" } })
 		end,
-		 "Open NVIM Config" },
+			"Open NVIM Config" },
 		i = { "<cmd>source ~/.config/nvim/init.lua<cr>", "Source dotfiles" },
 	},
 	s = {
@@ -69,9 +69,9 @@ wk.register({
 	},
 	d = {
 		name = "+todo",
-		t = {"<cmd>TodoTelescope<cr>", "Todo Telescope"},
-		n = {"<cmd>lua require('todo-comments').jump_next({keywords={'ERROR','WARNING','TODO', 'TEST'}})<cr>", "Next todo"},
-		p = {"<cmd>lua require('todo-comments').jump_prev({keywords={'ERROR','WARNING','TODO'}})<cr>", "Next todo"},
+		t = { "<cmd>TodoTelescope<cr>", "Todo Telescope" },
+		n = { "<cmd>lua require('todo-comments').jump_next({keywords={'ERROR','WARNING','TODO', 'TEST'}})<cr>", "Next todo" },
+		p = { "<cmd>lua require('todo-comments').jump_prev({keywords={'ERROR','WARNING','TODO'}})<cr>", "Next todo" },
 	},
 	p = {
 		name = "+plugins",
