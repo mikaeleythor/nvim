@@ -26,6 +26,6 @@ configs.setup({
 	-- TODO: Disable this in favor of guess-indent
 	indent = {
 		enable = true,
-		disable = { "html", "css", "sql", "tex", "js", "md", "norg", "lua" },
+		disable = { "html", "css", "sql", "tex", "javascript", "md", "norg", "lua" },
 	},
 })
