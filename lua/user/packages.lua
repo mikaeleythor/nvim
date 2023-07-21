@@ -21,9 +21,8 @@ return {
 		"glepnir/dashboard-nvim",
 		commit = "0af0ad1",
 		-- NOTE: Setting priority to make sure it loads before indent-blankline
-		--priority = 1000,
-		event = "VimEnter",
 		priority = 100,
+		event = "VimEnter",
 		lazy = false,
 		config = function()
 			vim.g.indentLine_fileTypeExclude = { 'dashboard', 'startify' }
@@ -60,16 +59,24 @@ return {
 	{
 		'lewis6991/gitsigns.nvim',
 		config = function()
-			require('gitsigns').setup()
+			require('gitsigns').setup({
+				sign_priority=100
+			})
 		end
 	},
-	{ "lukas-reineke/indent-blankline.nvim", lazy = false, priority = 99 },
-	--{ 'giusgad/hologram.nvim', config = function()
-	--require('hologram').setup {
-	--auto_display = true,
-	--}
-	--end
-	--},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		lazy = false,
+		priority = 99 },
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		--opts = {
+			-- your configuration comes here
+			-- or leave it empty to use the default settings
+			-- refer to the configuration section below
+		--},
+	},
 	{ '3rd/image.nvim',
 		dependencies = {
 			{
@@ -151,7 +158,7 @@ return {
 					}
 				},
 				dependencies = { dir = "~/Desktop/lua/mermaid/module.lua" },
-			}, {}, {})
+			})
 		end,
 		run = ":Neorg sync-parsers",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
@@ -187,6 +194,8 @@ return {
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
+		lazy = false,
+		priority = 1001,
 		config = function()
 			require("catppuccin").setup()
 		end,
@@ -220,6 +229,8 @@ return {
 	"neovim/nvim-lspconfig", -- LSP configuration
 	"mfussenegger/nvim-jdtls", -- LSP extensions for eclipse.jdt.ls
 	"mfussenegger/nvim-dap", -- Debug Adapter Protocol plugin
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+	{ "folke/neodev.nvim",    opts = { library = { plugins = { "nvim-dap-ui" }, types = true }, } },
 	"onsails/lspkind-nvim", -- Formatting plugin
 
 	-- cmp plugins
