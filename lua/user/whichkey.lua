@@ -10,7 +10,6 @@ wk.register({
 	e = { "<cmd>e<cr>", "Open" },
 	n = {
 		name = "+notes",
-		--l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
 		l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
 		s = { "<cmd>Neorg workspace school<cr>", "School notebook" },
 		w = { function()
@@ -63,11 +62,33 @@ wk.register({
 		n = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
 		r = { "<cmd>Telescope lsp_references<cr>", "LSP references" },
 		d = { "<cmd>Telescope lsp_definitions<cr>", "LSP definitions" },
-		t = { "<cmd>Telescope lsp_type_definitions<cr>", "LSP type definitions" },
+		t = { "<cmd>Trouble<cr>", "LSP type definitions" },
 		i = { "<cmd>LspInfo<cr>", "LSP info" },
 
 	},
 	d = {
+		name = "+debug",
+		c = { "<cmd>DapContinue<cr>", "Continue" },
+		u = { "<cmd>DapStepOut<cr>", "Step out" },
+		o = { "<cmd>DapStepOver<cr>", "Step over" },
+		i = { "<cmd>DapStepInto<cr>", "Step into" },
+		d = { "<cmd>DapToggleBreakpoint<cr>", "Toggle breakpoint" },
+		h = { "<cmd>DapToggleRepl<cr>", "Toggle repl" },
+		t = { "<cmd>DapTerminate<cr>", "Terminate" },
+		r = { function ()
+			require("dap").restart()
+		end, "restart" },
+		j = { function ()
+			require("dap").up()
+		end, "Go up in stacktrace without stepping"},
+		k = { function ()
+			require("dap").down()
+		end, "Go down in stacktrace without stepping"},
+		g = { function ()
+			require("dap").run_to_cursor()
+		end, "Continue execution to current cursor"}
+	},
+	j = {
 		name = "+todo",
 		t = { "<cmd>TodoTelescope<cr>", "Todo Telescope" },
 		n = { "<cmd>lua require('todo-comments').jump_next({keywords={'ERROR','WARNING','TODO', 'TEST'}})<cr>", "Next todo" },
