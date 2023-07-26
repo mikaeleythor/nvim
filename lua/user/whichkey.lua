@@ -1,17 +1,76 @@
+vim.api.nvim_set_keymap("n", "<space>", "", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = 'æ'
+
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 local wk = require("which-key")
 
--- Keymaps in normal mode, prefixed by leader
+-- NOTE: Keymaps in normal mode
+wk.register({
+	-- NOTE: Alt keymaps
+	['<A-j>'] = { '<cmd>MoveLine(1)<cr>', "Move line down" },
+	['<A-k>'] = { '<cmd>MoveLine(-1)<cr>', "Move line up" },
+	['<A-h>'] = { '<cmd>MoveChar(-1)<cr>', "Move selection left" },
+	['<A-l>'] = { '<cmd>MoveChar(1)<cr>', "Move selection right" },
+	['<A-Left>'] = { '<c-w>H', 'Move window left' },
+	['<A-Down>'] = { '<c-w>J', 'Move window down' },
+	['<A-Up>'] = { '<c-w>K', 'Move window up' },
+	['<A-Right>'] = { '<c-w>L', 'Move window right' },
+	-- NOTE: Ctrl keymaps
+	['<c-h>'] = { "<c-w>h", 'Move cursor left' },
+	['<c-j>'] = { "<c-w>j", 'Move cursor down' },
+	['<c-k>'] = { "<c-w>k", 'Move cursor up' },
+	['<c-l>'] = { "<c-w>l", 'Move cursor right' },
+	['<c-t>'] = { "<cmd>tabnew<cr>", 'Open new tab' },
+	['<c-w>'] = { "<cmd>tabc<cr>", 'Close current tab' },
+	['<c-s-l>'] = { "gt", 'Next tab' },
+	['<c-s-h>'] = { "gT", 'Previous tab' },
+	['<c-b>'] = { "<cmd>bw<cr>", 'Close current buffer' },
+	['<c-s-j>'] = { "<cmd>bnext<cr>", 'Next buffer' },
+	['<c-s-k>'] = { "<cmd>bprevious<cr>", 'Previous previous' },
+	['gd'] = { function()
+		vim.lsp.buf.definition()
+	end, 'Go to definition' },
+	['gD'] = { function()
+		vim.lsp.buf.declaration()
+	end, 'Go to declaration' },
+	['gi'] = { function()
+		vim.lsp.buf.implementation()
+	end, 'Go to implementation' },
+	['gr'] = { function()
+		vim.lsp.buf.references()
+	end, 'Go to references' },
+	['K'] = { function()
+		vim.lsp.buf.hover()
+	end, 'Hover' }
+}, { noremap = true, silent = true, mode = "n" })
+
+-- NOTE: Keymaps in visual mode
+wk.register({
+	['<A-j>'] = { '<cmd>MoveBlock(1)<cr>', "Move block down" },
+	['<A-k>'] = { '<cmd>MoveBlock(-1)<cr>', "Move block up" },
+	['<A-h>'] = { '<cmd>MoveHBlock(-1)<cr>', "Move block left" },
+	['<A-l>'] = { '<cmd>MoveHBlock(1)<cr>', "Move block right" },
+}, { noremap = true, silent = true, mode = "v" })
+
+-- NOTE: Keymaps in normal mode, prefixed by leader
 wk.register({
 	w = { "<cmd>w<cr>", "Write" },
 	q = { "<cmd>q<cr>", "Quit" },
 	e = { "<cmd>e<cr>", "Open" },
-	n = {
-		name = "+notes",
-		l = { "<cmd>Neorg workspace linux<cr>", "Linux notebook" },
-		s = { "<cmd>Neorg workspace school<cr>", "School notebook" },
+	b = { "<cmd>BufferTabsToggle<cr>", "Toggle buffer tabs" },
+	o = {
+		name = "+neorg",
+		l = { function()
+			vim.cmd("tcd ~/Documents/notes/linux")
+			vim.cmd("Neorg workspace linux")
+		end, "Linux notebook" },
+		s = { function()
+			vim.cmd("tcd ~/Documents/notes/school")
+			vim.cmd("Neorg workspace school")
+		end, "Linux notebook" },
 		w = { function()
 			vim.cmd("tcd ~/Documents/notes/work")
 			vim.cmd("Neorg workspace work")
@@ -19,6 +78,11 @@ wk.register({
 	},
 	k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
 	h = { ":set invhlsearch<cr>", "Toggle search highlights" },
+	n = {
+		name = "+noice",
+		h = { "<cmd>NoiceTelescope<cr>", "Notification history" },
+		d = { "<cmd>Noice dismiss<cr>", " Dismiss notification" },
+	},
 	f = {
 		name = "+files",
 		e = { ":Oil --float<cr>", "File browser" },
@@ -55,6 +119,8 @@ wk.register({
 		c = { "<cmd>Telescope git_commits<cr>", "Git commits" },
 		b = { "<cmd>Telescope git_branches<cr>", "Git branches" },
 		d = { "<cmd>Telescope git_bcommits<cr>", "Git diff current buffer" },
+		v = { "<cmd>DiffviewOpen<cr>", "Open DiffView" },
+		x = { "<cmd>DiffviewClose<cr>", "Close DiffView" },
 	},
 	l = {
 		name = "+lsp",
@@ -75,18 +141,18 @@ wk.register({
 		d = { "<cmd>DapToggleBreakpoint<cr>", "Toggle breakpoint" },
 		h = { "<cmd>DapToggleRepl<cr>", "Toggle repl" },
 		t = { "<cmd>DapTerminate<cr>", "Terminate" },
-		r = { function ()
+		r = { function()
 			require("dap").restart()
 		end, "restart" },
-		j = { function ()
+		j = { function()
 			require("dap").up()
-		end, "Go up in stacktrace without stepping"},
-		k = { function ()
+		end, "Go up in stacktrace without stepping" },
+		k = { function()
 			require("dap").down()
-		end, "Go down in stacktrace without stepping"},
-		g = { function ()
+		end, "Go down in stacktrace without stepping" },
+		g = { function()
 			require("dap").run_to_cursor()
-		end, "Continue execution to current cursor"}
+		end, "Continue execution to current cursor" }
 	},
 	j = {
 		name = "+todo",
@@ -120,3 +186,17 @@ wk.register({
 		s = { "<cmd>'<,'>ToggleTermSendVisualSelection<cr>", "Send visual selection" },
 	}
 }, { prefix = "<leader>", noremap = true, silent = true, mode = "v" })
+
+
+function _G.set_terminal_keymaps()
+  local topts = {buffer = 0}
+  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], topts)
+  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], topts)
+  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], topts)
+  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], topts)
+  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], topts)
+  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], topts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

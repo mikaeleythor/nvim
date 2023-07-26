@@ -1,3 +1,4 @@
+-- TODO: Sort plugins by functionality (LSP, DAP, GIT, Keymaps)
 return {
 	{
 		"NvChad/nvim-colorizer.lua",
@@ -46,6 +47,20 @@ return {
 	},
 	'fedepujol/move.nvim',
 	{
+		'tomiis4/BufferTabs.nvim',
+		dependencies = {
+			'nvim-tree/nvim-web-devicons', -- optional
+		},
+		lazy = false,
+		config = function()
+			require('buffertabs').setup({
+				display = "column",
+				horizontal = "right",
+				vertical = "center"
+			})
+		end
+	},
+	{
 		"folke/todo-comments.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
 		config = function()
@@ -60,7 +75,7 @@ return {
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			require('gitsigns').setup({
-				sign_priority=100
+				sign_priority = 100
 			})
 		end
 	},
@@ -71,11 +86,7 @@ return {
 	{
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		--opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
-		--},
+		--opts = {},
 	},
 	{ '3rd/image.nvim',
 		dependencies = {
@@ -147,8 +158,10 @@ return {
 									"<cmd>Neorg index<CR>")
 								keybinds.map("norg", "n", "<localleader>fh",
 									"<cmd>Telescope neorg search_headings<CR>")
-								keybinds.map("norg", "n", "<localleader>jj",
+								keybinds.map("norg", "n", "<localleader>jd",
 									"<cmd>Neorg journal today<CR>")
+								keybinds.map("norg", "n", "<localleader>jm",
+									"<cmd>Neorg journal tomorrow<CR>")
 								keybinds.map("norg", "n", "<localleader>jt",
 									"<cmd>Neorg journal toc<CR>")
 								keybinds.map("norg", "n", "<localleader>fl",
