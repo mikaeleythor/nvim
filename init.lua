@@ -12,9 +12,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Source keybindings (mainly to ensure leader is set before plugins are loaded)
-require('user.keymaps')
-
 -- Source plugin table
 local packages = require('user.packages')
 
