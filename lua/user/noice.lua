@@ -1,5 +1,9 @@
+-- NOTE: What is this?
 vim.o.shortmess = "s"
 vim.opt.shortmess:append("S")
+vim.opt.shortmess:append("F")
+
+-- TODO: Configure nvim-notify better
 require("noice").setup({
 	lsp = {
 		-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
