@@ -130,7 +130,9 @@ return {
 		"nvim-neorg/neorg",
 		commit = '67c729f',
 		config = function()
-			require('neorg').setup(require('user.neorg'))
+			require('neorg').setup(
+				require('user.neorg')
+			)
 		end,
 		run = ":Neorg sync-parsers",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-neorg/neorg-telescope" },
