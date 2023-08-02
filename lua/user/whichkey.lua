@@ -27,7 +27,7 @@ wk.register({
 	['<c-w>'] = { "<cmd>tabc<cr>", 'Close current tab' },
 	['<c-s-l>'] = { "gt", 'Next tab' },
 	['<c-s-h>'] = { "gT", 'Previous tab' },
-	['<c-b>'] = { "<cmd>bw<cr>", 'Close current buffer' },
+	['<c-q>'] = { "<cmd>bw<cr>", 'Close current buffer' },
 	['<c-s-j>'] = { "<cmd>bnext<cr>", 'Next buffer' },
 	['<c-s-k>'] = { "<cmd>bprevious<cr>", 'Previous previous' },
 	['gd'] = { function()
@@ -55,11 +55,24 @@ wk.register({
 	['<A-l>'] = { '<cmd>MoveHBlock(1)<cr>', "Move block right" },
 }, { noremap = true, silent = true, mode = "v" })
 
+-- NOTE: Keymaps in insert mode
+wk.register({
+	['<c-BS>'] = { "<c-w>", "Delete word" }
+}, { noremap = true, silent = true, mode = "i" })
+
 -- NOTE: Keymaps in normal mode, prefixed by leader
 wk.register({
 	w = { "<cmd>w<cr>", "Write" },
 	q = { "<cmd>q<cr>", "Quit" },
 	e = { "<cmd>e<cr>", "Open" },
+	m = { function()
+		local filepath = vim.fn.expand("%:({p")
+		local bwd = "/"
+		for i in filepath:gmatch('([^/].*[$/])') do
+			bwd = bwd .. i
+		end
+		vim.cmd("tcd " .. bwd)
+	end, "tcd cwd" },
 	b = { "<cmd>BufferTabsToggle<cr>", "Toggle buffer tabs" },
 	o = {
 		name = "+neorg",
@@ -189,13 +202,13 @@ wk.register({
 
 
 function _G.set_terminal_keymaps()
-  local topts = {buffer = 0}
-  vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], topts)
-  vim.keymap.set('t', 'jk', [[<C-\><C-n>]], topts)
-  vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], topts)
-  vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], topts)
-  vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], topts)
-  vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], topts)
+	local topts = { buffer = 0 }
+	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], topts)
+	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], topts)
+	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], topts)
+	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], topts)
+	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], topts)
+	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], topts)
 end
 
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
