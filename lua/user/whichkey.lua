@@ -12,8 +12,8 @@ wk.register({
 	-- NOTE: Alt keymaps
 	['<A-j>'] = { '<cmd>MoveLine(1)<cr>', "Move line down" },
 	['<A-k>'] = { '<cmd>MoveLine(-1)<cr>', "Move line up" },
-	['<A-h>'] = { '<cmd>MoveChar(-1)<cr>', "Move selection left" },
-	['<A-l>'] = { '<cmd>MoveChar(1)<cr>', "Move selection right" },
+	['<A-h>'] = { '<cmd>MoveHChar(-1)<cr>', "Move selection left" },
+	['<A-l>'] = { '<cmd>MoveHChar(1)<cr>', "Move selection right" },
 	['<A-Left>'] = { '<c-w>H', 'Move window left' },
 	['<A-Down>'] = { '<c-w>J', 'Move window down' },
 	['<A-Up>'] = { '<c-w>K', 'Move window up' },
