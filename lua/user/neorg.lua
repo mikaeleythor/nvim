@@ -13,7 +13,7 @@ return {
 				default_workspace = "linux",
 			},
 		},
-		["core.integrations.telescope"] = {},
+		-- ["core.integrations.telescope"] = {},
 		["external.mermaid"] = {},
 		["core.looking-glass"] = {},
 		-- HACK: Localleader keybinds
@@ -37,6 +37,7 @@ return {
 						"<cmd>Neorg journal toc<CR>")
 					keybinds.map("norg", "n", "<localleader>fl",
 						"<cmd>Neorg keybind all core.looking-glass.magnify-code-block<CR>")
+					keybinds.map("norg", "n", "<localleader>b", "I*<ESC>A*<ESC>")
 				end,
 			}
 		}
