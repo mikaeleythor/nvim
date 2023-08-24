@@ -6,7 +6,23 @@ return {
 	},
 	"windwp/nvim-autopairs", -- autoclosing brackets plugin
 	"lervag/vimtex", -- LaTeX compiler
-	"iamcco/markdown-preview.nvim",
+	{ "iamcco/markdown-preview.nvim",
+		build = "pnpm up && cd app && pnpm install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	},
+	{
+		'numToStr/Comment.nvim',
+		-- opts = {
+		-- add any options here
+		-- },
+		lazy = false,
+		config = function ()
+			require('Comment').setup()
+		end
+	},
 	"preservim/nerdcommenter", -- block commenting
 	"nvim-lualine/lualine.nvim", -- statusline
 	{
