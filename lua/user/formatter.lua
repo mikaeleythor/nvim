@@ -9,6 +9,9 @@ require("formatter").setup({
 	log_level = vim.log.levels.WARN,
 	-- All formatter configurations are opt-in
 	filetype = {
+		cs = {
+			require("formatter.filetypes.cs").csharpier,
+		},
 		markdown = {
 			function()
 				return {
