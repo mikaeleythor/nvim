@@ -181,7 +181,8 @@ wk.register({
 		f = {
 			function()
 				local util = require("formatter.util")
-				local formatters = util.get_available_formatters_for_ft(util.get_current_buffer_file_extension())
+				local file_extension = util.get_current_buffer_file_extension()
+				local formatters = util.get_available_formatters_for_ft(file_extension)
 				if next(formatters) ~= nil then
 					print("formattable: " .. util.get_current_buffer_file_extension())
 					vim.cmd(":Format")
