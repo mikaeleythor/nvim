@@ -1,25 +1,11 @@
---vim.opt_local.shiftwidth = 2
---vim.opt_local.tabstop = 2
---vim.opt_local.cmdheight = 2
---require 'jdtls_setup'.setup()
-local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
-local root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew', '.gitignore'})
-local home = os.getenv('HOME')
-local workspace_dir = home .. "/.workspace" .. project_name
---local jar_patterns = {
---'/.config/nvim/.extensions/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar',
---'/.config/nvim/.extensions/vscode-java-test/server/*.jar',
---}
-
---local bundles = {}
---for _, jar_pattern in ipairs(jar_patterns) do
---for _, bundle in ipairs(vim.split(vim.fn.glob(home .. jar_pattern), '\n')) do if not vim.endswith(bundle, 'com.microsoft.java.test.runner.jar') then table.insert(bundles, bundle)
---end
---end
---end
-
+vim.opt_local.shiftwidth = 2
+vim.opt_local.tabstop = 2
+vim.opt_local.cmdheight = 2
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
+local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+
+local workspace_dir = '/home/cinder/.java_workspaces/' .. project_name
 local config = {
 	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
@@ -34,16 +20,23 @@ local config = {
 		'-Declipse.product=org.eclipse.jdt.ls.core.product',
 		'-Dlog.protocol=true',
 		'-Dlog.level=ALL',
-		'-Xms1g',
+		'-Xmx1g',
 		'--add-modules=ALL-SYSTEM',
 		'--add-opens', 'java.base/java.util=ALL-UNNAMED',
 		'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
 		-- 💀
-		'-jar', home .. '/.local/share/nvim/lsp_servers/jdtls/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar',
+		-- '-jar', '/home/cinder/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher.gtk.linux.x86_64_1.2.700.v20221108-1024.jar',
+		'-jar',
+		'/home/cinder/.local/share/nvim/mason/packages/jdtls/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar',
+		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
+		-- Must point to the                                                     Change this to
+		-- eclipse.jdt.ls installation                                           the actual version
+
 
 		-- 💀
-		'-configuration', home .. '/.local/share/nvim/lsp_servers/jdtls/config_LINUX', -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
+		'-configuration', '/home/cinder/.local/share/nvim/mason/packages/jdtls/config_linux',
+		-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
 		-- Must point to the                      Change to one of `linux`, `win` or `mac`
 		-- eclipse.jdt.ls installation            Depending on your system.
 
@@ -52,11 +45,35 @@ local config = {
 		-- See `data directory configuration` section in the README
 		'-data', workspace_dir,
 	},
-
+	init_options = {
+		bundles = {
+			vim.fn.glob(
+			"/home/cinder/.local/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar", 1)
+		},
+		settings = {
+			java = {
+				-- implementationsCodeLens = { enabled = true },
+				imports = { -- <- this
+					gradle = {
+						enabled = true,
+						wrapper = {
+							enabled = true,
+							checksums = {
+								{
+									sha256 = "65e45cec6f57a53c6e0f03e0bd51930fd8f820732c6c6f3f6bc4ebb67382d553",
+									allowed = true,
+								}
+							},
+						}
+					}
+				},
+			},
+		}
+	},
 	-- 💀
 	-- This is the default if not provided, you can remove it. Or adjust as needed.
 	-- One dedicated LSP server & client will be started per unique root_dir
-	root_dir = root_dir,
+	root_dir = require('jdtls.setup').find_root({ '.git', 'mvnw', 'gradlew' }),
 
 	-- Here you can configure eclipse.jdt.ls specific settings
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
@@ -73,28 +90,7 @@ local config = {
 	-- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
 	--
 	-- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
-	init_options = {
-		--bundles = {
-		--vim.fn.glob(home .. '/.config/nvim/.extensions/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar')
-		--},
-		extendedClientCapabilities = require 'jdtls'.extendedClientCapabilities,
-	},
 }
-
--- This bundles definition is the same as in the previous section (java-debug installation)
-local bundles = {
-	vim.fn.glob(home .. '/.config/nvim/.extensions/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar')
-};
-
--- This is the new part
-vim.list_extend(bundles, vim.split(vim.fn.glob(home .. '/.config/nvim/.extensions/vscode-java-test/server/*.jar'), "\n"))
-config['init_options'] = {
-	bundles = bundles;
-}
-
 -- This starts a new client & server,
 -- or attaches to an existing client & server depending on the `root_dir`.
 require('jdtls').start_or_attach(config)
-require 'jdtls'.setup_dap({ hotcodereplace = "auto" })
---require('jdtls.dap').setup_dap_main_class_configs()
-require 'jdtls.setup'.add_commands()
