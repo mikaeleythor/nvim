@@ -13,18 +13,13 @@ return {
 				default_workspace = "linux",
 			},
 		},
-		-- ["core.integrations.telescope"] = {},
-		["external.mermaid"] = {},
 		["core.looking-glass"] = {},
 		-- HACK: Localleader keybinds
 		["core.keybinds"] = {
 			config = {
 				hook = function(keybinds)
-					-- Binds the `gtd` key in `norg` mode to execute `:echo 'Hello'`
 					keybinds.map("norg", "n", "<localleader>fi",
 						"<cmd>Neorg index<CR>")
-					keybinds.map("norg", "n", "<localleader>fh",
-						"<cmd>Telescope neorg search_headings<CR>")
 					keybinds.map("norg", "n", "<localleader>jt",
 						"<cmd>Neorg journal toc<CR>")
 					keybinds.map("norg", "n", "<localleader>jd",
@@ -42,5 +37,4 @@ return {
 			}
 		}
 	},
-	dependencies = { dir = "~/Desktop/lua/mermaid/module.lua" },
 }
