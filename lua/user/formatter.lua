@@ -26,5 +26,8 @@ require("formatter").setup({
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
+		sql = {
+			require("formatter.filetypes.sql").pgformat,
+		}
 	},
 })
