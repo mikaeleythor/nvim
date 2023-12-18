@@ -11,13 +11,6 @@ local wk = require("which-key")
 
 -- NOTE: Keymaps in normal mode
 wk.register({ -- NOTE: Alt keymaps
-	-- NOTE: Jupyter
-	["]x"] = {
-		function()
-			require("iron").core.send_motion()
-		end,
-		"Send motion to iron",
-	},
 	["/"] = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "Fuzzy find local" },
 	["<A-j>"] = { "<cmd>MoveLine(1)<cr>", "Move line down" },
 	["<A-k>"] = { "<cmd>MoveLine(-1)<cr>", "Move line up" },
@@ -175,6 +168,7 @@ wk.register({
 	},
 	g = {
 		name = "+git",
+		g = { "<cmd>Neogit<cr>", "Neogit" },
 		s = { "<cmd>Telescope git_status<cr>", "Git status" },
 		c = { "<cmd>Telescope git_commits<cr>", "Git commits" },
 		b = { "<cmd>Telescope git_branches<cr>", "Git branches" },
