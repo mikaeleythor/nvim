@@ -32,12 +32,17 @@ vim.cmd('set foldmethod=expr')
 vim.cmd('set foldexpr="nvim_treesitter#foldexpr()"')
 vim.cmd('set foldlevelstart=99')
 
-vim.cmd('filetype plugin on') -- NOTE: This was set for jdtls at some point
+vim.cmd('filetype plugin on')                    -- NOTE: This was set for jdtls at some point
 vim.cmd("let g:ftplugin_sql_omni_key = '<C-p>'") -- NOTE: Better than <c-c>
+
+vim.diagnostic.config({
+	virtual_text = false,
+	float = { border = border },
+})
 
 -- NOTE: Set diagnostics Icons
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
