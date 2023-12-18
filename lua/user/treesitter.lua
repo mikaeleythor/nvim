@@ -11,10 +11,11 @@ configs.setup({
 		"lua",
 		"dockerfile",
 		"bash",
+		"cpp"
 	},
 	highlight = {
 		enable = true,
-		disable = { "markdown", "tex" },
+		disable = { "markdown", "tex", "latex" },
 	},
 	-- TODO: Disable this in favor of nvim-autopairs
 	autopairs = {
