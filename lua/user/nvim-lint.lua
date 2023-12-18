@@ -1,5 +1,16 @@
 local lint = require('lint')
+
 lint.linters_by_ft = {
-  markdown = {'vale'},
+  markdown = {'markdownlint'},
 }
-vim.cmd("au BufWritePost lua require('lint').try_lint()")
+
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
