@@ -53,10 +53,10 @@ return {
 			require("which-key").setup()
 		end,
 	},
-	{
-		"jedrzejboczar/possession.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-	},
+	-- {
+	-- 	"jedrzejboczar/possession.nvim",
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- },
 	{
 		"NeogitOrg/neogit",
 		dependencies = {
@@ -65,7 +65,7 @@ return {
 
 			-- Only one of these is needed, not both.
 			"nvim-telescope/telescope.nvim", -- optional
-			"ibhagwan/fzf-lua", -- optional
+			"ibhagwan/fzf-lua",           -- optional
 		},
 		config = true,
 	},
@@ -86,11 +86,11 @@ return {
 			require("catppuccin").setup()
 		end,
 	},
-	"windwp/nvim-autopairs", -- autoclosing brackets plugin
-	"stevearc/dressing.nvim", -- Makes input go woo
-	"onsails/lspkind-nvim", -- Formatting plugin
+	"windwp/nvim-autopairs",    -- autoclosing brackets plugin
+	"stevearc/dressing.nvim",   -- Makes input go woo
+	"onsails/lspkind-nvim",     -- Formatting plugin
 	"nvim-lualine/lualine.nvim", -- statusline
-	{ -- GUI
+	{                           -- GUI
 		"folke/noice.nvim",
 		commit = "ed7bbe0",
 		dependencies = {
@@ -151,22 +151,22 @@ return {
 	-- 		vim.keymap.set("v", "d", "d<cmd>AutolistRecalculate<cr>")
 	-- 	end,
 	-- },
-	{ -- Paste images into markdown
-		"postfen/clipboard-image.nvim",
-		config = function()
-			require("clipboard-image").setup({
-				norg = {
-					img_dir = { "img" }, -- Use table for nested dir (New feature form PR #20)
-					--img_dir_txt = "/assets/img",
-					img_handler = function(img) -- New feature from PR #22
-						local script = string.format('./image_compressor.sh "%s"', img.path)
-						os.execute(script)
-					end,
-					affix = "![](%s)",
-				},
-			})
-		end,
-	},
+	-- { -- Paste images into markdown
+	-- 	"postfen/clipboard-image.nvim",
+	-- 	config = function()
+	-- 		require("clipboard-image").setup({
+	-- 			norg = {
+	-- 				img_dir = { "img" }, -- Use table for nested dir (New feature form PR #20)
+	-- 				--img_dir_txt = "/assets/img",
+	-- 				img_handler = function(img) -- New feature from PR #22
+	-- 					local script = string.format('./image_compressor.sh "%s"', img.path)
+	-- 					os.execute(script)
+	-- 				end,
+	-- 				affix = "![](%s)",
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{ -- Highlighted TODO comments
 		"folke/todo-comments.nvim",
 		dependencies = "nvim-lua/plenary.nvim",
@@ -188,36 +188,36 @@ return {
 	},
 
 	-- AI Tools
-	{ -- Chatgpt plugin
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("chatgpt").setup({
-				api_key_cmd = "base64 --decode " .. home .. "/.config/nvim/.gptkey",
-			})
-		end,
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
-	{
-		"HPRIOR/telescope-gpt",
-		event = "VeryLazy",
-		dependencies = { "nvim-telescope/telescope.nvim", "jackMort/ChatGPT.nvim" },
-	},
-	{
-		"jcdickinson/codeium.nvim",
-		-- commit = "b1ff0d6c993e3d87a4362d2ccd6c660f7444599f",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"hrsh7th/nvim-cmp",
-		},
-		config = function()
-			require("codeium").setup({})
-		end,
-	},
+	-- { -- Chatgpt plugin
+	-- 	"jackMort/ChatGPT.nvim",
+	-- 	event = "VeryLazy",
+	-- 	config = function()
+	-- 		require("chatgpt").setup({
+	-- 			api_key_cmd = "base64 --decode " .. home .. "/.config/nvim/.gptkey",
+	-- 		})
+	-- 	end,
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- },
+	-- {
+	-- 	"HPRIOR/telescope-gpt",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = { "nvim-telescope/telescope.nvim", "jackMort/ChatGPT.nvim" },
+	-- },
+	-- {
+	-- 	"jcdickinson/codeium.nvim",
+	-- 	-- commit = "b1ff0d6c993e3d87a4362d2ccd6c660f7444599f",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"hrsh7th/nvim-cmp",
+	-- 	},
+	-- 	config = function()
+	-- 		require("codeium").setup({})
+	-- 	end,
+	-- },
 
 	-- Terminals
 	{
@@ -253,23 +253,23 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 	},
-	"lervag/vimtex", -- LaTeX compiler
-	"williamboman/mason.nvim", -- LSP installer
+	"lervag/vimtex",                    -- LaTeX compiler
+	"williamboman/mason.nvim",          -- LSP installer
 	"williamboman/mason-lspconfig.nvim", -- Recommended plugin with lspconfig
-	"neovim/nvim-lspconfig", -- LSP configuration
-	"mfussenegger/nvim-jdtls", -- LSP extensions for eclipse.jdt.ls
-	"nanotee/sqls.nvim", -- LSP plugin for sqls LSP server
+	"neovim/nvim-lspconfig",            -- LSP configuration
+	"mfussenegger/nvim-jdtls",          -- LSP extensions for eclipse.jdt.ls
+	"nanotee/sqls.nvim",                -- LSP plugin for sqls LSP server
 
 	-- Debugging
 	"mfussenegger/nvim-dap", -- Debug Adapter Protocol plugin
 	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-	{ -- Neovim development lsp
+	{                       -- Neovim development lsp
 		"folke/neodev.nvim",
 		opts = { library = { plugins = { "nvim-dap-ui" }, types = true } },
 	},
-	"mfussenegger/nvim-lint", -- Linter
+	"mfussenegger/nvim-lint",    -- Linter
 	"mhartington/formatter.nvim", -- Formatter
-	{ -- Refactoring plugin
+	{                            -- Refactoring plugin
 		"ThePrimeagen/refactoring.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -290,12 +290,12 @@ return {
 		"L3MON4D3/LuaSnip",
 		run = "make install_jsregexp",
 	},
-	"hrsh7th/nvim-cmp", -- Autocompletion plugin
-	"hrsh7th/cmp-buffer", -- Autocompletion source
-	"hrsh7th/cmp-path", -- Autocompletion source
-	"hrsh7th/cmp-nvim-lsp", -- Autocompletion source
-	"hrsh7th/cmp-nvim-lua", -- Autocompletion source
-	"hrsh7th/cmp-cmdline", -- Autocompletion source
-	"hrsh7th/cmp-emoji", -- Autocompletion source
+	"hrsh7th/nvim-cmp",        -- Autocompletion plugin
+	"hrsh7th/cmp-buffer",      -- Autocompletion source
+	"hrsh7th/cmp-path",        -- Autocompletion source
+	"hrsh7th/cmp-nvim-lsp",    -- Autocompletion source
+	"hrsh7th/cmp-nvim-lua",    -- Autocompletion source
+	"hrsh7th/cmp-cmdline",     -- Autocompletion source
+	"hrsh7th/cmp-emoji",       -- Autocompletion source
 	"saadparwaiz1/cmp_luasnip", -- Snippets src for nvim-cmp
 }

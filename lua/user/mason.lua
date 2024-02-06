@@ -1,9 +1,10 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
-		--"sqlls",
-		--"pylsp",
-		--"eslint",
+		"spectral",
+		"lua_ls",
+		"marksman"
+
 		--"html", --, "stylua", "prettier", "autopep8"
 	},
 })

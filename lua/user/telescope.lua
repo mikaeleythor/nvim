@@ -24,5 +24,5 @@ telescope.setup({
 		},
 	},
 })
-telescope.load_extension("possession")
-telescope.load_extension("gpt")
+-- telescope.load_extension("possession")
+-- telescope.load_extension("gpt")
