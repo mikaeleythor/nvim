@@ -141,3 +141,16 @@ lspconfig["matlab_ls"].setup({
 	handlers = handlers,
 	capabilities = capabilities,
 })
+lspconfig["sqls"].setup{
+    on_attach = function(client, bufnr)
+        require('sqls').on_attach(client, bufnr)
+    end,
+}
+lspconfig["sqlls"].setup({
+	handlers = handlers,
+	capabilities = capabilities,
+})
+lspconfig["awk_ls"].setup({
+	handlers = handlers,
+	capabilities = capabilities,
+})

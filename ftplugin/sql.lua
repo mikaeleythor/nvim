@@ -6,12 +6,10 @@ local wk = require("which-key")
 local opts = { noremap = true, silent = true, buffer = 0 }
 
 wk.register({
-	["<leader>lf"] = { "<cmd>!sqlfluff fix --dialect postgres --force %<cr>", "Format" },
-	["<leader>ll"] = { "<cmd>!sqlfluff lint --dialect postgres %<cr>", "Lint" },
-	["<leader>eq"] = { "<cmd>SqlsExecuteQuery<cr>", "Execute selected query" }
+	["æx"] = { "<cmd>SqlsExecuteQuery<cr>", "Execute script" }
 }, opts)
 
 wk.register({
-	["<leader>eq"] = { "<cmd>SqlsExecuteQuery<cr>", "Execute selected query" }
+	["æx"] = { ":'<,'>SqlsExecuteQuery<cr>", "Execute selected query" }
 }, { noremap = true, silent = true, mode = { "v", "x" } })
 

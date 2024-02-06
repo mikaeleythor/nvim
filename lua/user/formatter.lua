@@ -28,6 +28,9 @@ require("formatter").setup({
 		},
 		sql = {
 			require("formatter.filetypes.sql").pgformat,
-		}
+		},
+		sh = {
+			require("formatter.filetypes.sh").shfmt,
+		},
 	},
 })
